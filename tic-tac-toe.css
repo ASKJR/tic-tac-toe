@@ -1,0 +1,40 @@
+.grid {
+	border-color: #FFFFFF !important;
+	border-width: 12px !important;
+	border:solid;
+    height: 100px;
+}
+
+
+
+#cell-1 {
+	border-right-color:  #000000 !important;
+	border-bottom-color: #000000 !important;
+}
+#cell-2 {
+	border-bottom-color: #000000 !important;
+}
+#cell-3 {
+	border-left-color: #000000 !important;
+	border-bottom-color: #000000 !important;
+}
+#cell-4 {
+	border-right-color:  #000000 !important;
+	border-bottom-color: #000000 !important;
+}
+#cell-5 {
+	border-bottom-color: #000000 !important;
+}
+
+#cell-6 {
+	border-left-color: #000000 !important;
+	border-bottom-color: #000000 !important;
+}
+#cell-7 {
+	border-right-color:  #000000 !important;
+}
+#cell-8 {
+}
+#cell-9 {
+	border-left-color: #000000 !important;
+}
