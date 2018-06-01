@@ -15,6 +15,7 @@ const IMPOSSIBLE_DIFFICULTY = 'impossible';
 var userType;
 var computerType;
 var difficultySettings;
+var winner;
 	
 $(function(){
 	
@@ -103,4 +104,55 @@ function setUserPreferences()
 function hideSettingsMenu()
 {
 	$('#settingsForm').hide();
+}
+
+function haveWonHorizontal()
+{
+	let xMark = 0;
+	let oMark = 0;
+
+	$('#board > .row').each(function(){
+		
+		let src;
+		oMark = 0;
+		xMark = 0;
+
+		$('.grid',this).each(function() {
+			
+			src = $(this).find('img').attr('src');
+			
+			if (src == null) {
+				return false;
+			}
+
+			if (src == 'img/circle.png') {
+				oMark++;
+			}
+			else {
+				xMark++;
+			}
+		});
+		
+		if (oMark == 3) {
+			setWinner(O_TYPE);
+			return false;	
+		}
+
+		if (xMark == 3) {
+			setWinner(X_TYPE);
+			return false;
+		}
+
+	});
+
+	if (winner == null) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function setWinner(winnerType)
+{
+	winner = winnerType;
 }
