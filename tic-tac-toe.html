@@ -1,58 +1,68 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title>tic-tac-toe</title>
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<meta charset="utf-8">	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"  crossorigin="anonymous"></script>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"  crossorigin="anonymous">
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjxsfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="tic-tac-toe.css">
+	<script type="text/javascript" src="tic-tac-toe.js"></script>
 </head>
 <body>
 	<div class="container">
-		<h1 class="text-center">tic-tac-toe</h1>
+		<h1 class="text-center">Tic-Tac-Toe</h1>
+
+		<form class="form-inline" action="" onsubmit="return false" id="settingsForm">
+	  		<div class="form-group">
+	    		<select class="form-control" id="selectType">
+	    			<option value="" selected disabled>Select your type</option>
+	      			<option value="X">I'm X.</option>
+	      			<option value="O">I'm a cricle.</option>
+	      		</select>
+	  		</div>
+	  		<div class="form-group">
+		    	<select class="form-control" id="selectDificulty">
+	    			<option value="" selected disabled>Select difficulty settings</option>
+	      			<option value="easy">Piece of cake.</option>
+	      			<option value="normal">Normal.</option>
+	      			<option value="impossible">Impossible.</option>
+		      	</select>
+	  		</div>
+	  		<button type="submit" onclick="setUserPreferences()" class="btn btn-success">Start game</button>
+		</form>
 		<hr>
 		<div class="col-xs-4 col-xs-offset-4">
 			<div class="row">
 				<div class="col-xs-4 grid" id="cell-1">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 				<div class="col-xs-4 grid" id="cell-2">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 				<div class="col-xs-4 grid" id="cell-3">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4 grid" id="cell-4">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 				<div class="col-xs-4  grid" id="cell-5">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 				<div class="col-xs-4  grid" id="cell-6">
-					<img src="img/x.png" class="img-responsive">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4  grid" id="cell-7">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 				<div class="col-xs-4  grid" id="cell-8">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 				<div class="col-xs-4  grid" id="cell-9">
-					<img src="img/circle.png" class="img-responsive">
 				</div>
 			</div>
-		</div>
+		</div>  
 	</div>
 </body>
 </html>
