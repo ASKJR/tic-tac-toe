@@ -22,7 +22,7 @@ $(function(){
 
 	$('.grid').click(function(){
 		setImg($(this).attr('id'));
-	})
+	});
 })
 
 function setImg(cellId) 
@@ -108,42 +108,71 @@ function hideSettingsMenu()
 
 function haveWonHorizontal()
 {
-	let xMark = 0;
-	let oMark = 0;
+	var horizontalSequence = [
+		['1','2','3'],
+		['4','5','6'],
+		['7','8','9']
+	];
 
-	$('#board > .row').each(function(){
+	return  isThereAWinnerInTheMatrix(3,3,horizontalSequence);
+	
+}
+
+function haveWonVertial() 
+{
+	var verticalSequence = [
+		['1','4','7'],
+		['2','5','8'],
+		['3','6','9']
+	];
+
+	return  isThereAWinnerInTheMatrix(3,3,verticalSequence);
+}
+
+function haveWonDiagonal()
+{
+	var diagonalSequence = [
+		['1','5','9'],
+		['3','5','7']
+	];
+
+	return isThereAWinnerInTheMatrix(2,3,diagonalSequence);
+}
+
+function isThereAWinnerInTheMatrix(line,column,matrix)
+{
+	var i,j,xMark,oMark;
+
+	for (i=0; i < line; i++) {
 		
-		let src;
-		oMark = 0;
 		xMark = 0;
+		oMark = 0;
 
-		$('.grid',this).each(function() {
-			
-			src = $(this).find('img').attr('src');
+		for(j=0; j < column; j++) {
+
+			src = $('#cell-' + matrix[i][j]).find('img').attr('src');
 			
 			if (src == null) {
-				return false;
+				break;
 			}
-
 			if (src == 'img/circle.png') {
 				oMark++;
 			}
 			else {
 				xMark++;
 			}
-		});
-		
+		}
+
 		if (oMark == 3) {
 			setWinner(O_TYPE);
-			return false;	
+			break;	
 		}
 
 		if (xMark == 3) {
 			setWinner(X_TYPE);
-			return false;
+			break;
 		}
-
-	});
+	}
 
 	if (winner == null) {
 		return false;
@@ -151,6 +180,7 @@ function haveWonHorizontal()
 		return true;
 	}
 }
+
 
 function setWinner(winnerType)
 {
