@@ -38,3 +38,8 @@
 #cell-9 {
 	border-left-color: #000000 !important;
 }
+
+.score {
+	font-size: 20px;
+	font-weight: bold;
+}

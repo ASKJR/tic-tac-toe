@@ -22,6 +22,10 @@ var difficultySettings;
 var winner;
 var winnerIds;
 var currentTurn = USER_TURN;
+var victoriesUser = 0;
+var victoriesComputer = 0;
+var draws = 0;
+
  
 
 $(function(){
@@ -250,17 +254,55 @@ function userMove(cellId)
 //----------------GAME FLOW----------------
 function endGame()
 {
-	var end = false;
 
 	if (haveWonHorizontal() || haveWonVertial() || haveWonDiagonal()) {
 
-		for (var i = 0; i < winnerIds.length; i++) {
+		for (let i = 0; i < winnerIds.length; i++) {
 			
 			$('#' + winnerIds[i]).css('background-color','#40E2A0');
 		}
+
+		incrementWinnerScore();
 		
-		end = true;	
+		return true;
 	}
 
-	return end;
+	else if (isDraw()) {
+
+		for (let i = 0; i < CELLS_IDS.length; i++) {
+			
+			$('#cell-' + CELLS_IDS[i]).css('background-color','black');
+		}
+
+		incrementDrawNumber();
+
+		return true;
+	}
+
+	else {
+		return false;
+	}
+}
+
+function isDraw()
+{
+	return getEmptyCellsIds().length  == 0;
+}
+
+function incrementDrawNumber()
+{
+	draws++;
+	$('#drawScore').text(draws);
+}
+
+function incrementWinnerScore()
+{
+	if (winner == userType) {
+		victoriesUser++;
+		$('#userScore').text(victoriesUser);
+	}
+	else {
+		victoriesComputer++;
+		$('#computerScore').text(victoriesComputer);
+	}
 }

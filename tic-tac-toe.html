@@ -16,53 +16,85 @@
 </head>
 <body>
 	<div class="container">
-		<h1 class="text-center">Tic-Tac-Toe</h1>
+		<h1 class="text-center">Tic-Tac-Toe</h1><hr>
+		<div class="row">
+			<form class="form-inline" action="" onsubmit="return false" id="settingsForm">
+		  		<div class="form-group">
+		    		<select class="form-control" id="selectType">
+		    			<option value="" selected disabled>Select your type</option>
+		      			<option value="X">I'm X.</option>
+		      			<option value="O">I'm a cricle.</option>
+		      		</select>
+		  		</div>
+		  		<div class="form-group">
+			    	<select class="form-control" id="selectDificulty">
+		    			<option value="" selected disabled>Select difficulty settings</option>
+		      			<option value="easy">Piece of cake.</option>
+		      			<option value="normal">Normal.</option>
+		      			<option value="impossible">Impossible.</option>
+			      	</select>
+		  		</div>
+		  		<button type="submit" onclick="setUserPreferences()" class="btn btn-success">Start game</button>
+			</form>
+		</div>
 
-		<form class="form-inline" action="" onsubmit="return false" id="settingsForm">
-	  		<div class="form-group">
-	    		<select class="form-control" id="selectType">
-	    			<option value="" selected disabled>Select your type</option>
-	      			<option value="X">I'm X.</option>
-	      			<option value="O">I'm a cricle.</option>
-	      		</select>
-	  		</div>
-	  		<div class="form-group">
-		    	<select class="form-control" id="selectDificulty">
-	    			<option value="" selected disabled>Select difficulty settings</option>
-	      			<option value="easy">Piece of cake.</option>
-	      			<option value="normal">Normal.</option>
-	      			<option value="impossible">Impossible.</option>
-		      	</select>
-	  		</div>
-	  		<button type="submit" onclick="setUserPreferences()" class="btn btn-success">Start game</button>
-		</form>
-		<hr>
-		<div class="col-xs-4 col-xs-offset-4" id="board">
-			<div class="row">
-				<div class="col-xs-4 grid" id="cell-1">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div class="col-xs-4">
+					<div class="panel panel-primary text-center">
+	      				<div class="panel-heading">YOU</div>
+	      				<div class="panel-body score" id="userScore">0</div>
+	    			</div>
+
 				</div>
-				<div class="col-xs-4 grid" id="cell-2">
+				<div class="col-xs-4">
+					<div class="panel panel-warning text-center">
+	      				<div class="panel-heading">DRAW</div>
+	      				<div class="panel-body score" id="drawScore">0</div>
+	    			</div>
 				</div>
-				<div class="col-xs-4 grid" id="cell-3">
+				<div class="col-xs-4">
+					<div class="panel panel-danger text-center">
+	      				<div class="panel-heading ">COMPUTER</div>
+	      				<div class="panel-body score" id="computerScore">0</div>
+	    			</div>
+				</div>
+			</div>	
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-4" id="board">
+				<div class="row">
+					<div class="col-xs-4 grid" id="cell-1">
+					</div>
+					<div class="col-xs-4 grid" id="cell-2">
+					</div>
+					<div class="col-xs-4 grid" id="cell-3">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4 grid" id="cell-4">
+					</div>
+					<div class="col-xs-4  grid" id="cell-5">
+					</div>
+					<div class="col-xs-4  grid" id="cell-6">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4  grid" id="cell-7">
+					</div>
+					<div class="col-xs-4  grid" id="cell-8">
+					</div>
+					<div class="col-xs-4  grid" id="cell-9">
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-4 grid" id="cell-4">
-				</div>
-				<div class="col-xs-4  grid" id="cell-5">
-				</div>
-				<div class="col-xs-4  grid" id="cell-6">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-4  grid" id="cell-7">
-				</div>
-				<div class="col-xs-4  grid" id="cell-8">
-				</div>
-				<div class="col-xs-4  grid" id="cell-9">
-				</div>
-			</div>
-		</div>  
+		</div>
+		<div class="row">
+			<hr>
+			<b>Developer:</b> Alberto Kato. <br>
+			<b>Contact:</b> albertokatojr at gmail dot com
+		</div>
 	</div>
 </body>
 </html>
