@@ -1,6 +1,25 @@
-/**
- * Developer: Alberto Kato
+/** 
+ * 	  _  __     _           _____                                 _   _             
+ *	 | |/ /    | |         / ____|                               | | (_)            
+ *	 | ' / __ _| |_ ___   | |     ___  _ __ _ __   ___  _ __ __ _| |_ _  ___  _ __  
+ *	 |  < / _` | __/ _ \  | |    / _ \| '__| '_ \ / _ \| '__/ _` | __| |/ _ \| '_ \ 
+ *	 | . \ (_| | || (_) | | |___| (_) | |  | |_) | (_) | | | (_| | |_| | (_) | | | |
+ *	 |_|\_\__,_|\__\___/   \_____\___/|_|  | .__/ \___/|_|  \__,_|\__|_|\___/|_| |_|
+ *	                                       | |                                      
+ *	                                       |_|                                       
+ *
+ * 											presents:
+ *		
+ *			 _____ _          _____               _____           
+ * 			/__   (_) ___    /__   \__ _  ___    /__   \___   ___ 
+ *			  / /\/ |/ __|____ / /\/ _` |/ __|____ / /\/ _ \ / _ \
+ *			 / /  | | (_|_____/ / | (_| | (_|_____/ / | (_) |  __/
+ *			 \/   |_|\___|    \/   \__,_|\___|    \/   \___/ \___|
+ *			                                                      
+ * Developer: 41 6C 62 65 72 74 6F  53 75 73 73 75 6D 75  4B 61 74 6F  4A 75 6E 69 6F 72 
  * Date: May 30th 2018.
+ * Contact: albertokatojr at gmail dot com
+ * 
  */
 
 /*types available*/
@@ -36,11 +55,17 @@ $(function(){
 		//MOVES
 		userMove($(this).attr('id'),userType);
 
-		if (endGame()) return;
+		if (endGame()) {
+			showBtnPlayAgain();
+			return;
+		}
 		
 		computerEasyMove();
 		
-		if (endGame()) return;
+		if (endGame()) {
+			showBtnPlayAgain();
+			return;
+		} 
 	});
 })
 
@@ -306,3 +331,42 @@ function incrementWinnerScore()
 		$('#computerScore').text(victoriesComputer);
 	}
 }
+
+function showBtnPlayAgain()
+{
+	$('#btnPlayAgain').show();
+}
+
+function hideBtnPlayAgain()
+{
+	$('#btnPlayAgain').hide();
+}
+
+
+
+function newGameMatch()
+{
+	hideBtnPlayAgain();
+	clearBoard();
+	setWinner(null);
+	setCurrentTurn(userType);
+}
+
+function restartGame()
+{
+	location.reload();
+}
+
+function clearBoard()
+{
+	for (let i = 0; i < CELLS_IDS.length; i++) {
+		cell = $('#cell-' + CELLS_IDS[i]);
+		
+		if (!isGridCellEmpty(cell)) {
+			cell.removeClass('not-empty');
+			cell.find('img').remove();
+			cell.css('background-color','#FFFFFF');
+		}
+	}
+}
+
