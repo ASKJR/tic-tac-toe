@@ -154,11 +154,18 @@ function setUserPreferences()
 	setUserType($('#selectType').val());
 	setUserDifficultySettings($('#selectDificulty').val());
 	hideSettingsMenu();
+	showBoards();
 }
 
 function hideSettingsMenu()
 {
 	$('#settingsForm').hide();
+}
+
+function showBoards()
+{
+	$('#scoreBoard').show();
+	$('#board').show();
 }
 
 function haveWonHorizontal()
