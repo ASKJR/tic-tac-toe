@@ -31,7 +31,20 @@ const EASY_DIFFICULTY = 'easy';
 const NORMAL_DIFFICULTY = 'normal';
 const IMPOSSIBLE_DIFFICULTY = 'impossible';
 const CELLS_IDS = ['1','2','3','4','5','6','7','8','9'];
-
+const horizontalSequence = [
+		['1','2','3'],
+		['4','5','6'],
+		['7','8','9']
+	];
+const verticalSequence = [
+		['1','4','7'],
+		['2','5','8'],
+		['3','6','9']
+	];
+const diagonalSequence = [
+		['1','5','9'],
+		['3','5','7']
+	];
 const USER_TURN  = 'user';
 const COMPUTER_TURN = 'computer';
 
@@ -60,7 +73,7 @@ $(function(){
 			return;
 		}
 		
-		computerEasyMove();
+		computerMove();
 		
 		if (endGame()) {
 			showBtnPlayAgain();
@@ -140,8 +153,6 @@ function setUserPreferences()
 {
 	setUserType($('#selectType').val());
 	setUserDifficultySettings($('#selectDificulty').val());
-	console.log(userType);
-	console.log(difficultySettings);
 	hideSettingsMenu();
 }
 
@@ -152,34 +163,16 @@ function hideSettingsMenu()
 
 function haveWonHorizontal()
 {
-	var horizontalSequence = [
-		['1','2','3'],
-		['4','5','6'],
-		['7','8','9']
-	];
-
-	return  isThereAWinnerInTheMatrix(3,3,horizontalSequence);
-	
+	return  isThereAWinnerInTheMatrix(3,3,horizontalSequence);	
 }
 
 function haveWonVertial() 
 {
-	var verticalSequence = [
-		['1','4','7'],
-		['2','5','8'],
-		['3','6','9']
-	];
-
 	return  isThereAWinnerInTheMatrix(3,3,verticalSequence);
 }
 
 function haveWonDiagonal()
 {
-	var diagonalSequence = [
-		['1','5','9'],
-		['3','5','7']
-	];
-
 	return isThereAWinnerInTheMatrix(2,3,diagonalSequence);
 }
 
@@ -263,12 +256,120 @@ function setCurrentTurn(turnTypeUser)
 
 //----------------MOVES----------------
 //COMPUTER-MOVE
-function computerEasyMove()
+function computerMove()
+{
+	switch (difficultySettings) {
+
+		case (NORMAL_DIFFICULTY):
+			computerUnpredictableMove();
+			break;
+		case (IMPOSSIBLE_DIFFICULTY):
+			computerSmartMove();
+			break;
+		default:
+			computerPredictableMove();
+			break;
+	}
+}
+
+function computerPredictableMove()
 {
 	var availableSpotsInGrid = getEmptyCellsIds();
 	setCurrentTurn(COMPUTER_TURN);
 	setImg(availableSpotsInGrid.pop(),computerType);
 }
+
+function computerUnpredictableMove()
+{
+	let availableSpotsInGrid = getEmptyCellsIds();
+	setCurrentTurn(COMPUTER_TURN);
+	let randomIndex = Math.floor(Math.random()*availableSpotsInGrid.length); 
+	setImg(availableSpotsInGrid[randomIndex],computerType);
+}
+
+function computerSmartMove()
+{
+	arrayIndex = getWhereUserIsAboutToWin();
+	
+	if (arrayIndex && arrayIndex.length > 0) {
+		setCurrentTurn(COMPUTER_TURN);
+		setImg('cell-' + arrayIndex.pop(),computerType);
+	}
+	else {
+		computerUnpredictableMove();
+	} 
+}
+
+function getWhereUserIsAboutToWin()
+{
+	var indexNotAllowUserVictory = [];
+	var imgUserTypeName = (userType == O_TYPE) ? 'img/circle.png' : 'img/x.png';
+
+	//horizontal
+	for (let i = 0; i < 3; i++) {
+		let userMark = 0;
+		for (let j = 0; j < 3; j++) {
+
+			src = $('#cell-' + horizontalSequence[i][j]).find('img').attr('src');
+			
+			if (src == null) {
+				indexNotAllowUserVictory.push(horizontalSequence[i][j]);
+			}
+
+			if (src == imgUserTypeName) {
+				userMark++;
+			}
+		}
+		if (userMark==2) {
+			return indexNotAllowUserVictory;
+		}
+		indexNotAllowUserVictory = [];
+	}
+	//Vertical
+	for (let i = 0; i < 3; i++) {
+		let userMark = 0;
+		for (let j = 0; j < 3; j++) {
+
+			src = $('#cell-' + verticalSequence[i][j]).find('img').attr('src');
+
+			if (src == null) {
+				indexNotAllowUserVictory.push(verticalSequence[i][j]);
+			}
+
+			if (src == imgUserTypeName) {
+				userMark++;
+			}
+		}
+		if (userMark==2) {
+			return indexNotAllowUserVictory;
+		}
+		indexNotAllowUserVictory = [];
+	}
+
+	//Diagonnal
+	for (let i = 0; i < 2; i++) {
+		let userMark = 0;
+		for (let j = 0; j < 3; j++) {
+
+			src = $('#cell-' + diagonalSequence[i][j]).find('img').attr('src');
+			
+			if (src == null) {
+				indexNotAllowUserVictory.push(diagonalSequence[i][j]);
+			}
+
+			if (src == imgUserTypeName) {
+				userMark++;
+			}
+		}
+
+		if (userMark==2) {
+			return indexNotAllowUserVictory;
+		}
+		indexNotAllowUserVictory = [];
+	}
+	return false;
+}
+
 //USER-MOVE
 function userMove(cellId)
 {
@@ -369,4 +470,3 @@ function clearBoard()
 		}
 	}
 }
-
