@@ -66,6 +66,9 @@ $(function(){
 	$('.grid').click(function() {
 		//GAME LOGIC
 		//MOVES
+		if (winner != null) {
+			return;
+		}
 		userMove($(this).attr('id'),userType);
 
 		if (endGame()) {
@@ -310,70 +313,113 @@ function computerSmartMove()
 function getWhereUserIsAboutToWin()
 {
 	var indexNotAllowUserVictory = [];
+	var computerVictory = [];
 	var imgUserTypeName = (userType == O_TYPE) ? 'img/circle.png' : 'img/x.png';
-
+	var imgComputerTypeName = (computerType == O_TYPE) ? 'img/circle.png' : 'img/x.png';
+	//console.log('user:' + imgUserTypeName,' computer: ' + imgComputerTypeName);
 	//horizontal
 	for (let i = 0; i < 3; i++) {
+		
 		let userMark = 0;
+		let computerMark = 0;
+
 		for (let j = 0; j < 3; j++) {
 
 			src = $('#cell-' + horizontalSequence[i][j]).find('img').attr('src');
 			
 			if (src == null) {
 				indexNotAllowUserVictory.push(horizontalSequence[i][j]);
+				computerVictory.push(horizontalSequence[i][j]);
 			}
 
 			if (src == imgUserTypeName) {
 				userMark++;
 			}
+			if (src == imgComputerTypeName) {
+				computerMark++;
+			}
 		}
-		if (userMark==2) {
+	
+
+		if (computerMark == 2) {
+			return computerVictory;
+		}
+		if (userMark == 2) {
 			return indexNotAllowUserVictory;
 		}
 		indexNotAllowUserVictory = [];
+		computerVictory = [];
 	}
 	//Vertical
 	for (let i = 0; i < 3; i++) {
+		
 		let userMark = 0;
+		let computerMark = 0;
+		
 		for (let j = 0; j < 3; j++) {
 
 			src = $('#cell-' + verticalSequence[i][j]).find('img').attr('src');
 
 			if (src == null) {
 				indexNotAllowUserVictory.push(verticalSequence[i][j]);
+				computerVictory.push(verticalSequence[i][j]);
 			}
 
+
+			if (src == imgComputerTypeName) {
+				computerMark++;
+			}
 			if (src == imgUserTypeName) {
 				userMark++;
 			}
+		}
+
+		if (computerMark==2) {
+			return computerVictory;
 		}
 		if (userMark==2) {
 			return indexNotAllowUserVictory;
 		}
 		indexNotAllowUserVictory = [];
+		computerVictory = [];
 	}
 
 	//Diagonnal
 	for (let i = 0; i < 2; i++) {
+		
 		let userMark = 0;
+		let computerMark = 0;
+
 		for (let j = 0; j < 3; j++) {
 
 			src = $('#cell-' + diagonalSequence[i][j]).find('img').attr('src');
 			
 			if (src == null) {
 				indexNotAllowUserVictory.push(diagonalSequence[i][j]);
+				computerVictory.push(diagonalSequence[i][j]);
 			}
 
 			if (src == imgUserTypeName) {
 				userMark++;
 			}
+
+			if (src == imgComputerTypeName) {
+				computerMark++;
+			}
+		}
+		console.log(computerMark);
+		if (computerMark==2) {
+			return computerVictory;
 		}
 
 		if (userMark==2) {
 			return indexNotAllowUserVictory;
 		}
+		computerVictory = [];
 		indexNotAllowUserVictory = [];
+
 	}
+
 	return false;
 }
 
