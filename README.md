@@ -5,4 +5,4 @@ game tic-tac-toe js
 
 ## Live on heroku:
 
- https://tic-tac-toe-askjr.herokuapp.com/
+ https://tic-tac-toe-askjr.herokuapp.com
